@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+
+option go_package = "services/pb";
+
+
+package livro;
+
+
+service LivroService {
+    rpc FindById(FindByIdRequest) returns (Livro);
+    rpc DeleteById(FindByIdRequest) returns (Livro);
+    rpc FindAll(EmptyRequest) returns (LivroList);
+    rpc Create(LivroRequest) returns (Livro);
+}
+
+
+message EmptyRequest {}
+
+message FindByIdRequest {
+    int64 id = 1;
+}
+
+
+message LivroRequest {
+    string titulo = 1;
+    string isbn = 2;
+    string autor = 3;
+    double preco = 4;
+}
+
+
+message Livro {
+    int64 id = 1;
+    string titulo = 2;
+    string isbn = 3;
+    string autor = 4;
+    double preco = 5;
+}
+
+
+message LivroList {
+    repeated Livro livros = 1;
+}
